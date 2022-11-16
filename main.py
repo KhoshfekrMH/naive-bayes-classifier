@@ -1,13 +1,14 @@
 import pandas as pd
 
 df = pd.read_csv('adult.csv', na_values=' ?')
-# region 1.fixing missing datas
+
+# region 1. fixing missing datas
 
 dataFrame = df.fillna(method='pad')
 
 # endregion
 
-# region 2.separate column and number of prior
+# region 2. separate column and number of prior
 Sex = dataFrame['Sex']
 Male = []
 Female = []
@@ -155,13 +156,12 @@ for i in range(32560):
 
 # endregion
 
-
 # region 3. Calculate each Probability of each Prior
 pMale = MaleNum / SexNum
 pFemale = FemaleNum / SexNum
 # endregion
 
-# region 4.likelihood
+# region 4. likelihood
 
 # ------ male -------
 BachelorsAndMale = []
@@ -254,7 +254,7 @@ for i in range(32560):
         SeperatedAndMale.append(Status[i])
 
 pMarried_civ_spouseAndMale = len(Married_civ_spouseAndMale) / len(Male)
-pNever_marriedAndMal = len(Never_marriedAndMal) / len(Male)
+pNever_marriedAndMale = len(Never_marriedAndMal) / len(Male)
 pDivorcedAndMale = len(DivorcedAndMale) / len(Male)
 pSeperatedAndMale = len(SeperatedAndMale) / len(Male)
 pMarried_spouse_absentAndMale = len(Married_spouse_absentAndMale) / len(Male)
@@ -425,7 +425,7 @@ for i in range(32560):
         SeperatedAndFemale.append(Status[i])
 
 pMarried_civ_spouseAndFemale = len(Married_civ_spouseAndFemale) / len(Female)
-pNever_marriedAndMal = len(Never_marriedAndMal) / len(Female)
+pNever_marriedAndFemale = len(Never_marriedAndFemale) / len(Female)
 pDivorcedAndFemale = len(DivorcedAndFemale) / len(Female)
 pSeperatedAndFemale = len(SeperatedAndFemale) / len(Female)
 pMarried_spouse_absentAndFemale = len(Married_spouse_absentAndFemale) / len(Female)
@@ -506,15 +506,154 @@ pEskimoSkinAndFemale = len(EskimoSkinAndFemale) / len(Female)
 pOtherSkinAndFemale = len(OtherSkinAndFemale) / len(Female)
 # endregion
 
-# region Calculate Naive Bayes
+# region 5. get data from user
 userEducation = input(
     "Write Education --> 0:Bachelors 1:Hs_guard 2:11th 3:Masters 4:9th 5:someCollage 6:Assoc_acdm 7:Assoc_voc "
     "8:prof_School 9:th7_th8 10:10th 11:11st_4th 12:12th 13:Preschool 14:Doctorate = ")
+if userEducation == '0':
+    userEducationMale = pBachelorsAndMale
+    userEducationFemale = pBachelorsAndFemale
+elif userEducation == '1':
+    userEducationMale = pHs_guardAndMale
+    userEducationFemale = pHs_guardAndFemale
+elif userEducation == '2':
+    userEducationMale = pth11AndMale
+    userEducationFemale = pth11AndFemale
+elif userEducation == '3':
+    userEducationMale = pMastersAndMale
+    userEducationFemale = pMastersAndFemale
+elif userEducation == '4':
+    userEducationMale = pth9AndMale
+    userEducationFemale = pth9AndFemale
+elif userEducation == '5':
+    userEducationMale = psomeCollageAndMale
+    userEducationFemale = psomeCollageAndFemale
+elif userEducation == '6':
+    userEducationMale = pAssoc_acdmAndMale
+    userEducationFemale = pAssoc_acdmAndFemale
+elif userEducation == '7':
+    userEducationMale = pAssoc_vocAndMale
+    userEducationFemale = pAssoc_vocAndFemale
+elif userEducation == '8':
+    userEducationMale = pprof_SchoolAndMale
+    userEducationFemale = pprof_SchoolAndFemale
+elif userEducation == '9':
+    userEducationMale = pth7_th8AndMale
+    userEducationFemale = pth7_th8AndFemale
+elif userEducation == '10':
+    userEducationMale = pth10AndMale
+    userEducationFemale = pth10AndFemale
+elif userEducation == '11':
+    userEducationMale = pst1_th4AndMale
+    userEducationFemale = pst1_th4AndFemale
+elif userEducation == '12':
+    userEducationMale = pth12AndMale
+    userEducationFemale = pth12AndFemale
+elif userEducation == '13':
+    userEducationMale = pPreschoolAndMale
+    userEducationFemale = pPreschoolAndFemale
+elif userEducation == '14':
+    userEducationMale = pDoctorateAndMale
+    userEducationFemale = pDoctorateAndFemale
+
 userState = input(
     "Write State --> 0:Married_civ_spouse 1:Never_married 2:Divorced 3:Seperated 4:Married_spouse_absent "
     "5:Married_AF_spouse 6:Widowed = ")
+if userState == '0':
+    userStateMale = pMarried_civ_spouseAndMale
+    userStateFemale = pMarried_civ_spouseAndFemale
+elif userState == '1':
+    userStateMale = pNever_marriedAndMale
+    userStateFemale = pNever_marriedAndFemale
+elif userState == '2':
+    userStateMale = pDivorcedAndMale
+    userStateFemale = pDivorcedAndFemale
+elif userState == '3':
+    userStateMale = pSeperatedAndMale
+    userStateFemale = pSeperatedAndFemale
+elif userState == '4':
+    userStateMale = pMarried_spouse_absentAndMale
+    userStateFemale = pMarried_spouse_absentAndFemale
+elif userState == '5':
+    userStateMale = pMarried_AF_spousAndMale
+    userStateFemale = pMarried_AF_spousAndFemale
+elif userState == '6':
+    userStateMale = pWidowedAndMale
+    userStateFemale = pWidowedAndFemale
+
 userOthers = input(
     "Write Others --> 0:Adm_clerical 1:Craft_repair 2:Sales 3:Exec_managerial 4:Handlers_cleaners "
     "5:Transport_moving 6:Prof_specialty 7:Farming_fishing 8:Tech_support 9:Machine_op_inspct 10:Protective_serv "
     "11:Other_service = ")
+if userOthers == '0':
+    userOthersMale = pAdm_clericalAndMale
+    userOthersFemale = pAdm_clericalAndFemale
+elif userOthers == '1':
+    userOthersMale = pCraft_repairAndMale
+    userOthersFemale = pCraft_repairAndFemale
+elif userOthers == '2':
+    userOthersMale = pSalesAndMale
+    userOthersFemale = pSalesAndFemale
+elif userOthers == '3':
+    userOthersMale = pExec_managerialAndMale
+    userOthersFemale = pExec_managerialAndFemale
+elif userOthers == '4':
+    userOthersMale = pHandlers_cleanersAndMale
+    userOthersFemale = pHandlers_cleanersAndFemale
+elif userOthers == '5':
+    userOthersMale = pTransport_movingAndMale
+    userOthersFemale = pTransport_movingAndFemale
+elif userOthers == '6':
+    userOthersMale = pProf_specialtyAndMale
+    userOthersFemale = pProf_specialtyAndFemale
+elif userOthers == '7':
+    userOthersMale = pFarming_fishingAndMale
+    userOthersFemale = pFarming_fishingAndFemale
+elif userOthers == '8':
+    userOthersMale = pTech_supportAndMale
+    userOthersFemale = pTech_supportAndFemale
+elif userOthers == '9':
+    userOthersMale = pMachine_op_inspctAndMale
+    userOthersFemale = pMachine_op_inspctAndFemale
+elif userOthers == '10':
+    userOthersMale = pProtective_servAndMale
+    userOthersFemale = pProtective_servAndFemale
+elif userOthers == '11':
+    userOthersMale = pOtherSkinAndMale
+    userOthersFemale = pOtherSkinAndFemale
+
 userSkinColor = input("Write State --> 0:whiteSkin 1:blackSkin 2:asianSkin 3:EskimoSkin 4:OtherSkin ")
+if userSkinColor == '0':
+    userSkinColorMale = pwhiteSkinAndMale
+    userSkinColorFemale = pwhiteSkinAndFemale
+elif userSkinColor == '1':
+    userSkinColorMale = pblackSkinAndMale
+    userSkinColorFemale = pblackSkinAndFemale
+elif userSkinColor == '2':
+    userSkinColorMale = pasianSkinAndMale
+    userSkinColorFemale = pasianSkinAndFemale
+elif userSkinColor == '3':
+    userSkinColorMale = pEskimoSkinAndMale
+    userSkinColorFemale = pEskimoSkinAndFemale
+elif userSkinColor == '4':
+    userSkinColorMale = pOtherSkinAndMale
+    userSkinColorFemale = pOtherSkinAndFemale
+
+
+# endregion
+
+# region 6. bayesMale and bayesFemale function
+def bayes(education, state, other, skin):
+    return education * state * other * skin * pMale
+
+
+maleBayes = bayes(userEducationMale, userStateMale, userOthersMale, userSkinColorMale)
+femaleBayes = bayes(userEducationFemale, userStateFemale, userOthersFemale, userSkinColorFemale)
+
+if maleBayes > femaleBayes:
+    print('Navies Bayes prediction is "Male"')
+else:
+    print('Navies Bayes prediction is "Female"')
+
+# endregion
+
