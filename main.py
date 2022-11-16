@@ -506,3 +506,15 @@ pEskimoSkinAndFemale = len(EskimoSkinAndFemale) / len(Female)
 pOtherSkinAndFemale = len(OtherSkinAndFemale) / len(Female)
 # endregion
 
+# region Calculate Naive Bayes
+userEducation = input(
+    "Write Education --> 0:Bachelors 1:Hs_guard 2:11th 3:Masters 4:9th 5:someCollage 6:Assoc_acdm 7:Assoc_voc "
+    "8:prof_School 9:th7_th8 10:10th 11:11st_4th 12:12th 13:Preschool 14:Doctorate = ")
+userState = input(
+    "Write State --> 0:Married_civ_spouse 1:Never_married 2:Divorced 3:Seperated 4:Married_spouse_absent "
+    "5:Married_AF_spouse 6:Widowed = ")
+userOthers = input(
+    "Write Others --> 0:Adm_clerical 1:Craft_repair 2:Sales 3:Exec_managerial 4:Handlers_cleaners "
+    "5:Transport_moving 6:Prof_specialty 7:Farming_fishing 8:Tech_support 9:Machine_op_inspct 10:Protective_serv "
+    "11:Other_service = ")
+userSkinColor = input("Write State --> 0:whiteSkin 1:blackSkin 2:asianSkin 3:EskimoSkin 4:OtherSkin ")
